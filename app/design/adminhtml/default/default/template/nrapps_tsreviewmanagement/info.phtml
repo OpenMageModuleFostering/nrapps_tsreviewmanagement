@@ -1,0 +1,174 @@
+<?php
+/**
+ * @category   NRApps
+ * @package    NRApps_TSReviewManagement
+ * @copyright  Copyright (c) 2014 integer_net GmbH (http://www.integer-net.de/)
+ * @license    http://www.trustedshops.com/tsdocument/TS_EULA_en.pdf
+ * @author     nr-apps.com (http://www.nr-apps.com/) powered by integer_net GmbH
+ * @author     integer_net GmbH <info@integer-net.de>
+ * @author     Viktor Franz <vf@integer-net.de>
+ */
+
+
+/** @var $this NRApps_TSReviewManagement_Block_Adminhtml_Info */
+?>
+
+<?php if($review = $this->getReview()): ?>
+
+    <div style="cursor: auto;">
+
+        <!--Review Review-->
+        <div class="box-left">
+            <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-account"><?php echo $this->__('Review Details') ?></h4>
+                </div>
+                <div class="fieldset">
+                    <table cellspacing="0" class="form-list">
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('UID') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $review->getData('uid') ?></strong></td>
+                        </tr>
+                        <?php if($orderDate = $review->getData('order_date')): ?>
+                            <tr>
+                                <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Order Date') ?></label></td>
+                                <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $orderDate ?></strong></td>
+                            </tr>
+                        <?php endif; ?>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Creation Date') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $this->formatDate($review->getData('creation_date'), 'medium', true) ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Change Date') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $this->formatDate($review->getData('change_date'), 'medium', true) ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Confirmation Date') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $this->formatDate($review->getData('confirmation_date'), 'medium', true) ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Consumer Email') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $review->getData('consumer_email') ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Order Reference') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $this->getOrderLink($review->getData('order_reference')) ?></strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!--Review Criterion-->
+        <div class="box-right">
+            <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-account"><?php echo $this->__('Customer Review') ?></h4>
+                </div>
+                <div class="fieldset">
+                    <table cellspacing="0" class="form-list">
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important; text-transform: uppercase; font-weight: bold;"><label><?php echo $this->__('Overall Score') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $this->getMarkInfo($review->getData('mark'), $review->getData('mark_description'), true) ?></strong></td>
+                        </tr>
+                        <?php if(is_array($review->getData('criterion'))) : ?>
+                            <?php foreach($review->getData('criterion') as $index => $criterion) : ?>
+                                <tr>
+                                    <td class="label" style="background-color: #fafafa !important; text-transform: uppercase;"><label><?php echo $this->__($review->getData("criterion/{$index}/type"))?></label></td>
+                                    <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $this->getMarkInfo($review->getData("criterion/{$index}/mark"), $review->getData("criterion/{$index}/mark_description"), true) ?></strong></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Comment') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $review->getData('comment') ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Shop Statement') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $review->getData('statement/statement') ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Shop Statement Date') ?></label></td>
+                            <?php if($review->getData('statement/creation_date')) : ?>
+                                <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $this->formatDate($review->getData('statement/creation_date'), 'medium', true) ?></strong></td>
+                            <?php endif; ?>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <!--Review Review-->
+        <!-- div class="box-left">
+            <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-account"><?php echo $this->__('Shop') ?></h4>
+                </div>
+                <div class="fieldset">
+                    <table cellspacing="0" class="form-list">
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('TSID') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $review->getData('shop/tsid') ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('URL') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $review->getData('shop/url') ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Name') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $review->getData('shop/name') ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Language') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $review->getData('shop/language_iso2') ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Target Market') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $review->getData('shop/target_market_iso3') ?></strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div -->
+
+        <!--Review Statement-->
+        <!-- div class="box-right">
+            <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-account"><?php echo $this->__('Statement') ?></h4>
+                </div>
+                <div class="fieldset">
+                    <table cellspacing="0" class="form-list">
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('UID') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $review->getData('statement/uid') ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Creation Date') ?></label></td>
+                            <?php if($review->getData('statement/creation_date')) : ?>
+                                <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $this->formatDate($review->getData('statement/creation_date'), 'medium', true) ?></strong></td>
+                            <?php endif; ?>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Change Date') ?></label></td>
+                            <?php if($review->getData('statement/change_date')) : ?>
+                                <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $this->formatDate($review->getData('statement/change_date'), 'medium', true) ?></strong></td>
+                            <?php endif; ?>
+                        </tr>
+                        <tr>
+                            <td class="label" style="background-color: #fafafa !important;"><label><?php echo $this->__('Statement') ?></label></td>
+                            <td class="value" style="background-color: #fafafa !important;"><strong><?php echo $review->getData('statement/statement') ?></strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div -->
+    </div>
+
+<?php else : ?>
+
+    <?php echo $this->__('Failed to load the review data.') ?>
+
+<?php endif; ?>

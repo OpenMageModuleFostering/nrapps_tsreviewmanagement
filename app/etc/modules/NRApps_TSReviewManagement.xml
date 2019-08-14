@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   NRApps
+ * @package    NRApps_TSReviewManagement
+ * @copyright  Copyright (c) 2014 integer_net GmbH (http://www.integer-net.de/)
+ * @license    http://www.trustedshops.com/tsdocument/TS_EULA_en.pdf
+ * @author     nr-apps.com (http://www.nr-apps.com/) powered by integer_net GmbH
+ * @author     integer_net GmbH <info@integer-net.de>
+ * @author     Viktor Franz <vf@integer-net.de>
+ */
+-->
+<config>
+    <modules>
+        <NRApps_TSReviewManagement>
+            <active>true</active>
+            <codePool>community</codePool>
+        </NRApps_TSReviewManagement>
+    </modules>
+</config>

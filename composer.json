@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/NRApps_TSReviewManagement",
+    "type": "magento-module",
+    "license": "Custom-License",
+    "homepage": "",
+    "description": "Trusted Shops review management Magento integration",
+    "authors": [
+    {
+        "name": "nr-apps.com powered by integer_net GmbH",
+        "email": "info@nr-apps.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

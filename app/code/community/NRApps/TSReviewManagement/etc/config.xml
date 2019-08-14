@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   NRApps
+ * @package    NRApps_TSReviewManagement
+ * @copyright  Copyright (c) 2014 integer_net GmbH (http://www.integer-net.de/)
+ * @license    http://www.trustedshops.com/tsdocument/TS_EULA_en.pdf
+ * @author     nr-apps.com (http://www.nr-apps.com/) powered by integer_net GmbH
+ * @author     integer_net GmbH <info@integer-net.de>
+ * @author     Viktor Franz <vf@integer-net.de>
+ */
+-->
+<config>
+    <modules>
+        <NRApps_TSReviewManagement>
+            <version>1.0.0</version>
+        </NRApps_TSReviewManagement>
+    </modules>
+    <global>
+        <helpers>
+            <nrapps_tsreviewmanagement>
+                <class>NRApps_TSReviewManagement_Helper</class>
+            </nrapps_tsreviewmanagement>
+        </helpers>
+        <blocks>
+            <nrapps_tsreviewmanagement>
+                <class>NRApps_TSReviewManagement_Block</class>
+            </nrapps_tsreviewmanagement>
+        </blocks>
+        <models>
+            <nrapps_tsreviewmanagement>
+                <class>NRApps_TSReviewManagement_Model</class>
+                <resourceModel>nrapps_tsreviewmanagement_resource</resourceModel>
+            </nrapps_tsreviewmanagement>
+            <nrapps_tsreviewmanagement_resource>
+                <class>NRApps_TSReviewManagement_Model_Resource</class>
+                <entities>
+                    <shop>
+                        <table>nrapps_tsreviewmanagement_shop</table>
+                    </shop>
+                    <review>
+                        <table>nrapps_tsreviewmanagement_review</table>
+                    </review>
+                    <review_criterion>
+                        <table>nrapps_tsreviewmanagement_review_criterion</table>
+                    </review_criterion>
+                    <review_statement>
+                        <table>nrapps_tsreviewmanagement_review_statement</table>
+                    </review_statement>
+                </entities>
+            </nrapps_tsreviewmanagement_resource>
+        </models>
+        <resources>
+            <nrapps_tsreviewmanagement_setup>
+                <setup>
+                    <module>NRApps_TSReviewManagement</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>
+            </nrapps_tsreviewmanagement_setup>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <nrapps_tsreviewmanagement before="Mage_Adminhtml">NRApps_TSReviewManagement_Adminhtml</nrapps_tsreviewmanagement>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <translate>
+            <modules>
+                <NRApps_TSReviewManagement>
+                    <files>
+                        <default>NRApps_TSReviewManagement.csv</default>
+                    </files>
+                </NRApps_TSReviewManagement>
+            </modules>
+        </translate>
+    </adminhtml>
+    <crontab>
+        <jobs>
+            <nrapps_tsreviewmanagement>
+                <schedule>
+                    <cron_expr>0 2 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>nrapps_tsreviewmanagement/scheduleService::exec</model>
+                </run>
+            </nrapps_tsreviewmanagement>
+        </jobs>
+    </crontab>
+    <default>
+        <nrapps_tsreviewmanagement>
+            <settings>
+                <tsid/>
+                <api_user/>
+                <api_password/>
+                <api_uri><![CDATA[https://api.trustedshops.com/rest/restricted/v2/shops/{{tsid}}/reviews.json]]></api_uri>
+                <api_param_size>100</api_param_size>
+                <is_scheduling>0</is_scheduling>
+                <dev_mode>0</dev_mode>
+            </settings>
+        </nrapps_tsreviewmanagement>
+    </default>
+</config>
